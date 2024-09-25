@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- web -->
+  <meta name="description" content="The website for the paper DROP: Dexterous Reorientation via Online Planning, which presents a sampling-bsaed method for the contact-rich cube reorientation task.">
+  <meta property="og:title" content="DROP: Dexterous Reorientation via Online Planning"/>
+  <meta property="og:description" content="A sampling-based approach for contact-rich manipulation."/>
+  <meta property="og:url" content="https://caltech-amber.github.io/drop/"/>
+  <meta property="og:image" content="static/images/banner.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="600"/>
+
+  <!-- twitter -->
+  <meta name="twitter:title" content="DROP: Dexterous Reorientation via Online Planning">
+  <meta name="twitter:description" content="A sampling-based approach for contact-rich manipulation.">
+  <meta name="twitter:image" content="static/images/banner.png">
+  <meta name="twitter:card" content="drop_banner_image">
+
+  <!-- keywords -->
+  <meta name="keywords" content="dexterous manipulation, in-hand manipulation, cube rotation, cube reorientation, robotics, contact-rich, sampling-based planning, sampling-based MPC, sampling-based predictive control">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- favicon -->
+  <title>DROP: Dexterous Reorientation via Online Planning</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">DROP: Dexterous Reorientation <br> via Online Planning</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://alberthli.github.io/" target="_blank">Albert H. Li</a>,</span>
+                <span class="author-block">
+                  <a href="https://pculbertson.github.io/" target="_blank">Preston Culbertson</a>,</span>
+                  <span class="author-block">
+                    <a href="https://vincekurtz.github.io/" target="_blank">Vince Kurtz</a>, and</span>
+                    <span class="author-block">
+                      <a href="http://ames.caltech.edu/" target="_blank">Aaron D. Ames</a>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Caltech<br></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2409.14562" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- ArXiv abstract Link -->
+                    <span class="link-block">
+                      <a href="https://arxiv.org/abs/2409.14562" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/Caltech-AMBER/drop" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Under Construction)</span>
+                  </a>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- center a title for the video -->
+      <!-- <h2 class="title is-3 has-text-centered">Video</h2> -->
+      <video poster="" id="tree" controls autoplay muted loop height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/drop_icra2025.mp4"
+        type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Achieving human-like dexterity is a longstanding challenge in robotics, in part due to the complexity of planning and control for contact-rich systems. In reinforcement learning (RL), one popular approach has been to use massively-parallelized, domain-randomized simulations to learn a policy <i>offline</i> over a vast array of contact conditions, allowing robust sim-to-real transfer. Inspired by recent advances in real-time parallel simulation, this work considers instead the viability of <i>online planning</i> methods for contact-rich manipulation by studying the well-known in-hand cube reorientation task. We propose a simple architecture that employs a sampling-based predictive controller and vision-based pose estimator to search for contact-rich control actions online. We conduct thorough experiments to assess the real-world performance of our method, architectural design choices, and key factors for robustness, demonstrating that our simple sampled-based approach achieves performance comparable to prior RL-based works.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- highlights -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Contact-Rich Maneuvers</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-pinch-rotate">
+          <h3 class="title is-4 has-text-centered">Pinch and Rotate</h3>
+          <video poster="" id="pinch-rotate" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-blah1">
+          <h3 class="title is-4 has-text-centered">Go2 Precise Jump (Real-World)</h3>
+          <video poster="" id="blah1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-blah2">
+          <h3 class="title is-4 has-text-centered">H1 Jogging (Sim)</h3>
+          <video poster="" id="blah2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end highlights -->
+
+
+<!-- Video carousel -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Selected Full Trials (5x Speed)</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/carousel1.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <source src="static/videos/carousel2.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-video3">
+          <video poster="" id="video3" autoplay controls muted loop height="100%">\
+            <source src="static/videos/carousel3.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End video carousel -->
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@article{li2024_drop,
+    title={DROP: Dexterous Reorientation via Online Planning},
+    author={Albert H. Li, Preston Culbertson, Vince Kurtz, and Aaron D. Ames},
+    year={2024},
+    journal={arXiv preprint arXiv:2409.14562},
+    note={Available at: \url{https://arxiv.org/abs/2409.14562}}
+}
+    </code></pre>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
