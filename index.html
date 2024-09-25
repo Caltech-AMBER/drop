@@ -1,223 +1,335 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <!-- web -->
-  <meta name="description" content="The website for the paper DROP: Dexterous Reorientation via Online Planning, which presents a sampling-bsaed method for the contact-rich cube reorientation task.">
-  <meta property="og:title" content="DROP: Dexterous Reorientation via Online Planning"/>
-  <meta property="og:description" content="A sampling-based approach for contact-rich manipulation."/>
-  <meta property="og:url" content="https://caltech-amber.github.io/drop/"/>
-  <meta property="og:image" content="static/images/banner.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="600"/>
+    <!-- web -->
+    <meta name="description" content="The website for the paper DROP: Dexterous Reorientation via Online Planning, which presents a sampling-bsaed method for the contact-rich cube reorientation task.">
+    <meta property="og:title" content="DROP: Dexterous Reorientation via Online Planning"/>
+    <meta property="og:description" content="A sampling-based approach for contact-rich manipulation."/>
+    <meta property="og:url" content="https://caltech-amber.github.io/drop/"/>
+    <meta property="og:image" content="static/images/banner.png" />
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="600"/>
 
-  <!-- twitter -->
-  <meta name="twitter:title" content="DROP: Dexterous Reorientation via Online Planning">
-  <meta name="twitter:description" content="A sampling-based approach for contact-rich manipulation.">
-  <meta name="twitter:image" content="static/images/banner.png">
-  <meta name="twitter:card" content="drop_banner_image">
+    <!-- twitter -->
+    <meta name="twitter:title" content="DROP: Dexterous Reorientation via Online Planning">
+    <meta name="twitter:description" content="A sampling-based approach for contact-rich manipulation.">
+    <meta name="twitter:image" content="static/images/banner.png">
+    <meta name="twitter:card" content="drop_banner_image">
 
-  <!-- keywords -->
-  <meta name="keywords" content="dexterous manipulation, in-hand manipulation, cube rotation, cube reorientation, robotics, contact-rich, sampling-based planning, sampling-based MPC, sampling-based predictive control">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- keywords -->
+    <meta name="keywords" content="dexterous manipulation, in-hand manipulation, cube rotation, cube reorientation, robotics, contact-rich, sampling-based planning, sampling-based MPC, sampling-based predictive control">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- favicon -->
-  <title>DROP: Dexterous Reorientation via Online Planning</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
+    <!-- favicon -->
+    <title>DROP: Dexterous Reorientation via Online Planning</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/full.min.css">
+    <link rel="stylesheet" href="./static/css/full-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/full-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/favicon.svg">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/full-carousel.min.js"></script>
+    <script src="./static/js/full-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">DROP: Dexterous Reorientation <br> via Online Planning</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://alberthli.github.io/" target="_blank">Albert H. Li</a>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://pculbertson.github.io/" target="_blank">Preston Culbertson</a>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://vincekurtz.github.io/" target="_blank">Vince Kurtz</a>, and
+                            </span>
+                            <span class="author-block">
+                                <a href="http://ames.caltech.edu/" target="_blank">Aaron D. Ames</a>
+                            </span>
+                        </div>
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">DROP: Dexterous Reorientation <br> via Online Planning</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                <a href="https://alberthli.github.io/" target="_blank">Albert H. Li</a>,</span>
-                <span class="author-block">
-                  <a href="https://pculbertson.github.io/" target="_blank">Preston Culbertson</a>,</span>
-                  <span class="author-block">
-                    <a href="https://vincekurtz.github.io/" target="_blank">Vince Kurtz</a>, and</span>
-                    <span class="author-block">
-                      <a href="http://ames.caltech.edu/" target="_blank">Aaron D. Ames</a>
-                  </span>
-                  </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Caltech</span>
+                        </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">Caltech<br></span>
-                  </div>
-
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                      <!-- Arxiv PDF link -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/2409.14562" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- ArXiv abstract Link -->
-                    <span class="link-block">
-                      <a href="https://arxiv.org/abs/2409.14562" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="ai ai-arxiv"></i>
-                      </span>
-                      <span>arXiv</span>
-                    </a>
-                  </span>
-
-                  <!-- Github link -->
-                  <span class="link-block">
-                    <a href="https://github.com/Caltech-AMBER/drop" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code (Under Construction)</span>
-                  </a>
-                </span>
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/pdf/2409.14562" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2409.14562" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://github.com/Caltech-AMBER/drop"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code (Under Construction)</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- center a title for the video -->
-      <!-- <h2 class="title is-3 has-text-centered">Video</h2> -->
-      <video poster="" id="tree" controls autoplay muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/videos/drop_icra2025.mp4"
-        type="video/mp4">
-      </video>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Achieving human-like dexterity is a longstanding challenge in robotics, in part due to the complexity of planning and control for contact-rich systems. In reinforcement learning (RL), one popular approach has been to use massively-parallelized, domain-randomized simulations to learn a policy <i>offline</i> over a vast array of contact conditions, allowing robust sim-to-real transfer. Inspired by recent advances in real-time parallel simulation, this work considers instead the viability of <i>online planning</i> methods for contact-rich manipulation by studying the well-known in-hand cube reorientation task. We propose a simple architecture that employs a sampling-based predictive controller and vision-based pose estimator to search for contact-rich control actions online. We conduct thorough experiments to assess the real-world performance of our method, architectural design choices, and key factors for robustness, demonstrating that our simple sampled-based approach achieves performance comparable to prior RL-based works.
-          </p>
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+            <div class="content has-text-centered">
+                <h2 class="title is-3">Overview Video (Best with 🔊)</h2>
+                <video poster="" id="intro" controls autoplay muted loop height="100%">
+                    <source src="./static/videos/drop_icra2025_compressed.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
+    </section>
 
-<!-- highlights -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Contact-Rich Maneuvers</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-
-        <div class="item item-pinch-rotate">
-          <h3 class="title is-4 has-text-centered">Pinch and Rotate</h3>
-          <video poster="" id="pinch-rotate" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
-          </video>
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Achieving human-like dexterity is a longstanding challenge in robotics, in part due to the complexity of planning and control for contact-rich systems. In reinforcement learning (RL), one popular approach has been to use massively-parallelized, domain-randomized simulations to learn a policy <i>offline</i> over a vast array of contact conditions, allowing robust sim-to-real transfer. Inspired by recent advances in real-time parallel simulation, this work considers instead the viability of <i>online planning</i> methods for contact-rich manipulation by studying the well-known in-hand cube reorientation task. We propose a simple architecture that employs a sampling-based predictive controller and vision-based pose estimator to search for contact-rich control actions online. We conduct thorough experiments to assess the real-world performance of our method, architectural design choices, and key factors for robustness, demonstrating that our simple sampled-based approach achieves performance comparable to prior RL-based works.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="item item-blah1">
-          <h3 class="title is-4 has-text-centered">Go2 Precise Jump (Real-World)</h3>
-          <video poster="" id="blah1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
-          </video>
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container">
+                <h2 class="title is-3 has-text-centered">Assorted Contact-Rich Maneuvers</h2>
+                We show a variety of contact-rich maneuvers that DROP can achieve. Some are quite dynamic and fast, others are measured and slow. Overall, we observe that the motions discovered via a simple sampling-based planner can be quite sophisticated, involving contact with all parts of the hand. To reach a goal, the cube must often be rotated via a complicated composition of moves, which demonstrates the expressiveness of sampling-based predictive controllers.
+
+                <div id="results-carousel" class="carousel results-carousel">
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Pinch and Rotate Forward</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Controlled Side Rotation</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/ring_gait.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">High-Friction Thumb Flick to Side</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/thumb_back_sweep.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">3-Finger Gaited Rotation</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/3_finger_gait.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Thumb Sweeping Under Cube</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/thumb_sweep_under.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Agile Sequence of 5 Rotations</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/5_rot_sequence.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Pulling Down with Thumb</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/thumb_pull_down.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Off-Axis Spin on Palm</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/off_axis_spin.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">High-Friction Thumb Flick Up</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/thumb_friction_rotate_back.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Pushing to Rotate Back</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/backward_rotation.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Thumb Swiping Back and Forth</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/back_and_forth_thumb_swipe.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">Upward Rotation via "Shimmying"</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/middle_finger_shimmy_rotate.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="item item-blah2">
-          <h3 class="title is-4 has-text-centered">H1 Jogging (Sim)</h3>
-          <video poster="" id="blah2" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/pinch_rotate.mp4" type="video/mp4">
-          </video>
+    <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container">
+                <h2 class="title is-3 has-text-centered">Curated Full Runs (5x Speed)</h2>
+                The following runs all use the CEM sampler, corresponding to the last row of Table I(B). As in the prior work "DeXtreme: Transfer of Agile In-hand Manipulation from Simulation to Reality," we consider a goal rotation reached when the cube is within 0.4 radians of it. New goal rotations are uniformly randomly sampled over SO(3) such that they are at least 90 degrees away from the previous goal to ensure sufficient difficulty.
+
+                <div id="full-carousel" class="carousel full-carousel">
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">81 Rotation Run</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/81_rots_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">59 Rotation Run</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/59_rots_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item item-steve">
+                        <h3 class="title is-4 has-text-centered">53 Rotation Run</h3>
+                        <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+                            <source src="./static/videos/53_rots_compressed.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
-        
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end highlights -->
+    </section>
 
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column">
 
-<!-- Video carousel -->
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Selected Full Trials (5x Speed)</h2>
-      <div id="results-carousel" class="carousel results-carousel">
+                    <div class="content">
+                        <h2 class="title is-3">The DROP Architecture</h2>
+                    </div>
 
-        <div class="item item-video1">
-          <video poster="" id="video1" autoplay controls muted loop height="100%">
-            <source src="static/videos/carousel1.mp4"
-            type="video/mp4">
-          </video>
+                    <figure class="image is-flex is-justify-content-center">
+                        <img src="./static/images/hero.png" alt="Demo Task" style="max-width: 50%;">
+                    </figure>
+
+                    <p>Our architecture has two parts.</p>
+
+                    <br>
+                    
+                    <p>
+                        <b>A sampling-based predictive controller.</b> The controller rolls out forward simulations of the system in parallel to compute some open-loop control spline, then while executing those motions, repeatedly replans in closed loop. We show that using the simple cross-entropy method (CEM), we can achieve remarkably expressive contact-rich motions on the cube rotation task.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <b>A vision-based cube pose estimator.</b> The estimator is further composed of three parts. First, a fine-tuned Resnet predicts keypoints corresponding to the corners of the cube based on RGBD images. Next, given known camera poses and a pinhole camera model, we use a factor-graph based fixed-lag smoother to estimate the cube pose corresponding to a set of images. Finally, because the smoother may result in estimates with non-negligible hand-cube penetration, we use a <i>corrector</i> to find a feasible cube pose estimate. The corrector is simply another simulation that maintains its own internal cube and hand states. However, the corrector imparts a virtual wrench onto its cube that attracts it towards the raw estimate from the smoother. This produces feasible cube states that resemble the smoother output.
+                    </p>
+
+                    <br>
+
+                    <div class="content">
+                        <h2 class="title is-3">Findings</h2>
+                    </div>
+
+                    <p>Here, we summarize a few interesting findings. For the most fine-grained quantitative details, please see the paper.</p>
+
+                    <br>
+
+                    <p>
+                        <b>DROP performs comparably to RL.</b> Prior works like <a href="https://arxiv.org/abs/1808.00177">Dactyl</a> and <a href="https://arxiv.org/abs/2210.13702">DeXtreme</a> learn robust cube rotation policies using offline RL and mass domain randomization. It is surprising that our simple online planning approach achieves similar performance and is robust enough to perform well in the real world.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <b>The CEM sampler outperforms predictive sampling and iLQR.</b> Prior work has shown that the simple <a href="https://arxiv.org/abs/2212.00541">predictive sampling</a> (PS) strategy is surprisingly effective on contact-rich planning tasks. Even though CEM is only slightly more complex, we find that it substantially outperforms PS, as well as the gradient-based iLQR planner, which struggles due to stiff contact dynamics (consistent with many <a href="https://arxiv.org/abs/2202.00817">prior observations</a>). We systematically evaluate the robustness of these planners in our paper, and find that CEM is far more robust to both model and estimator error, which may explain its performance.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <b>Performance is sensitive to number of threads.</b> Unsurprisingly, adding more threads improves performance. However, in this work, we already use a server-grade CPU in order to plan with 120 threads. This motivates future work that may perform parallel contact-rich simulation in real time using GPUs, which could massively boost performance on all contact-rich tasks.
+                    </p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="item item-video2">
-          <video poster="" id="video2" autoplay controls muted loop height="100%">
-            <source src="static/videos/carousel2.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-
-        <div class="item item-video3">
-          <video poster="" id="video3" autoplay controls muted loop height="100%">\
-            <source src="static/videos/carousel3.mp4"
-            type="video/mp4">
-          </video>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-<!--BibTex citation -->
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h1 class="title">Citation</h1>
+            If you found our work useful, please use the following citation.
+            <pre><code>
 @article{li2024_drop,
     title={DROP: Dexterous Reorientation via Online Planning},
     author={Albert H. Li, Preston Culbertson, Vince Kurtz, and Aaron D. Ames},
@@ -225,27 +337,25 @@
     journal={arXiv preprint arXiv:2409.14562},
     note={Available at: \url{https://arxiv.org/abs/2409.14562}}
 }
-    </code></pre>
-  </div>
-</section>
-<!--End BibTex citation -->
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-          </p>
-
+            </code></pre>
         </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            This page was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+
 </html>
