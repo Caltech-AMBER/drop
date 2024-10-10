@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="cube">
+  <xacro:macro name="cube" params="suffix alpha:=1.0">
+    <link name="${'cube_' + suffix if suffix else 'cube'}">
+      <inertial>
+        <origin xyz="0 0 0" />
+        <mass value="0.108" />
+        <inertia ixx="0.0000882" ixy="0"
+                ixz="0" iyy="0.0000882"
+                iyz="0" izz="0.0000882" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" />
+        <geometry>
+          <mesh filename="package://cro_ros/urdf/cube/meshes/cube.obj" />
+        </geometry>
+        <material name="cube_color">
+          <color rgba="0 0 0 ${alpha}" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" />
+        <geometry>
+          <box size="0.07 0.07 0.07" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+</robot>

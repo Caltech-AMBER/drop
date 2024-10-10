@@ -1,0 +1,74 @@
+line-length = 120
+respect-gitignore = false
+exclude=[
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    ".pixi",  # .pixi directory
+    "install",  # installation directories from ROS2
+]
+
+[lint]
+pydocstyle.convention = "google"
+select = [
+    "ANN",  # annotations
+    "N",  # naming conventions
+    "D",  # docstrings
+    "B",  # flake8 bugbear
+    "E",  # pycodestyle errors
+    "F",  # Pyflakes rules
+    "I",  # isort formatting
+    "PLC",  # Pylint convention warnings
+    "PLE",  # Pylint errors
+    "PLR",  # Pylint refactor recommendations
+    "PLW",  # Pylint warnings
+]
+ignore = [
+    "ANN101",  # Missing type annotation for self
+    "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed
+    "D100",  # missing docstring in public module
+    "D104",  # missing docstring in public package
+    "D203",  # blank line before class docstring
+    "D211",  # no blank line before class
+    "D212",  # multi-line docstring summary at first line
+    "D213",  # multi-line docstring summary at second line
+    "PLR0913",  # Too many arguments in function definition
+    "N803",  # Argument name should be lowercase
+    "PLR0915",  # Too many statements
+    "PLR0912",  # Too many branches
+]
+
+[lint.isort]
+combine-as-imports = true
+split-on-trailing-comma = false
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"

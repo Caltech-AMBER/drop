@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="leap_rh_mounted">
+  <xacro:include filename="$(find leap_rh)/urdf/leap_rh.xacro"/>
+
+  <link name="world"/>
+
+  <joint name="world_to_leap_mount_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="leap_mount_ghost"/>
+  </joint>
+
+  <link name="leap_mount_ghost">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://leap_rh/meshes/leap_mount.obj"/>
+      </geometry>
+    </visual>
+    <material name="black">
+      <color rgba="0.2 0.2 0.2 0.25"/>
+    </material>
+  </link>
+
+  <joint name="leap_mount_to_palm_joint" type="fixed">
+    <origin xyz="0.124 -0.0305 -0.06045" rpy="3.141593 0.346491 0"/>
+    <parent link="leap_mount_ghost"/>
+    <child link="palm_ghost"/>
+  </joint>
+
+  <xacro:leap_rh alpha="0.25" suffix="ghost"/>
+</robot>

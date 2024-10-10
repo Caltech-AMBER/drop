@@ -1,0 +1,66 @@
+services:
+  # a dummy service to create volume subpaths
+  # see: https://github.com/moby/moby/issues/47842#issuecomment-2249050939
+  volume_instantiation:
+      image: "ubuntu:latest"
+      container_name: "volume_instantiation"
+      command: |
+        mkdir -p /usr/local/zed
+      volumes:
+        - cro:/usr/local
+
+  # actual cro service
+  cube_rotation_obelisk:
+    shm_size: '12gb'
+    build:
+      context: .
+      args:
+        USER: $USER
+        UID: $UID
+        GID: $UID
+        CUBE_ROTATION_OBELISK_ROOT: $CUBE_ROTATION_OBELISK_ROOT
+        DEV: $DEV
+      dockerfile: Dockerfile
+    network_mode: host
+    ipc: host
+    environment:
+      NVIDIA_DRIVER_CAPABILITIES: all
+      DISPLAY: $DISPLAY
+      USER: $USER
+      UID: $UID
+      GID: $UID
+      CUBE_ROTATION_OBELISK_ROOT: $CUBE_ROTATION_OBELISK_ROOT
+      DEV: $DEV
+      QT_X11_NO_MITSHM: 1
+    security_opt:
+      - seccomp=unconfined
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    volumes:
+      - ./../:$CUBE_ROTATION_OBELISK_ROOT
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:$HOME/.Xauthority:rw
+      - $HOME/.gitconfig:$HOME/.gitconfig
+      - $HOME/.ssh:$HOME/.ssh
+      - type: volume
+        source: cro
+        target: /usr/local/zed
+        volume:
+          subpath: zed
+    privileged: true
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    working_dir: $CUBE_ROTATION_OBELISK_ROOT
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+volumes:
+  cro:
+    driver: local
