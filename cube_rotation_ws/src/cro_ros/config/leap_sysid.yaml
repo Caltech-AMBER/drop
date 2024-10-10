@@ -1,0 +1,103 @@
+config: cro
+onboard:
+  control:
+    - pkg: cro_sysid
+      executable: cro_sysid
+      params:
+        mode: leap
+        t_data_collect: 10.0
+        num_iters: 25
+        timestep: 0.01
+        kp0: 0.2827620538871408
+        kv0: 0.08484981477307343
+        damping0: 0.003955015283771064
+        frictionloss0: 0.035302420100902204
+        friction_general0: 0.2
+        friction_tip0: 0.7
+        friction_cube0: 1.0
+        kp_min: 0.001
+        kv_min: 0.001
+        damping_min: 0.001
+        frictionloss_min: 0.0
+        friction_general_min: 0.001
+        friction_tip_min: 0.001
+        friction_cube_min: 0.001
+        kp_stdev: 0.05
+        kv_stdev: 0.025
+        damping_stdev: 0.005
+        frictionloss_stdev: 0.005
+        friction_general_stdev: 0.025
+        friction_tip_stdev: 0.025
+        friction_cube_stdev: 0.025
+        num_elites: 5
+        num_samples: 125
+        data_path: bag.json
+      publishers:
+        - ros_parameter: pub_ctrl_setting
+          topic: /cro/ctrl
+          msg_type: PositionSetpoint
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      subscribers:
+        - ros_parameter: sub_est_setting
+          topic: /cro/q_leap_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      timers:
+        - ros_parameter: timer_ctrl_setting
+          timer_period_sec: 0.01
+          callback_group: None
+  estimation:
+    - pkg: obelisk_leap_cpp
+      executable: leap_example_state_estimator
+      publishers:
+        - ros_parameter: pub_est_setting
+          topic: /cro/q_leap_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      subscribers:
+        - ros_parameter: sub_sensor_setting
+          topic: /cro/q_leap_meas
+          msg_type: ObkJointEncoders
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      timers:
+        - ros_parameter: timer_est_setting
+          timer_period_sec: 0.01
+          callback_group: None
+  robot:
+    # ############# #
+    # REAL HARDWARE #
+    # ############# #
+    - is_simulated: False
+      pkg: obelisk_leap_cpp
+      executable: obelisk_leap_robot
+      params:
+        KP: 75
+        KI: 0
+        KD: 25
+      # callback_groups:
+      publishers:
+        - ros_parameter: pub_sensor_setting
+          topic: /cro/q_leap_meas
+          msg_type: ObkJointEncoders
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      subscribers:
+        - ros_parameter: sub_ctrl_setting
+          topic: /cro/ctrl
+          msg_type: PositionSetpoint
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      timers:
+          - ros_parameter: timer_sensor_setting
+            timer_period_sec: 0.02
+            callback_group: None

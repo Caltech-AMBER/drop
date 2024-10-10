@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# builds and source all cro ROS packages - should be called only after "obk"!
+function cro() {
+    if [ -z "$HAS_OBK_ACTIVATED" ]; then
+        # sets up Obelisk in the current terminal
+        obk
+    fi
+
+    # change MJPC_TASKS_DIR
+    export MJPC_TASKS_DIR=$CUBE_ROTATION_OBELISK_ROOT/cube_rotation_ws/build/cro_control/_deps/mjpc-build/mjpc/tasks
+    echo -e "\033[1;32mMJPC_TASKS_DIR set to $MJPC_TASKS_DIR\033[0m"
+
+    # [NOTE] to debug, add '--event-handlers console_direct+' to the colcon build command
+    curr_dir=$(pwd)
+    cd $CUBE_ROTATION_OBELISK_ROOT/cube_rotation_ws
+    colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release --parallel-workers $(nproc)
+    source install/setup.bash
+    cd $curr_dir
+    echo -e "\033[1;32mAll cro packages built and sourced!\033[0m"
+}
+
+function setup {
+    ros2 launch cro_ros cro.launch.py
+}
+
+function run() {
+    obk-activate cro
+}
+
+function stop() {
+    obk-deactivate cro
+}
+
+function kill() {
+    obk-shutdown cro
+}

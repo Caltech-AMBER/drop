@@ -1,0 +1,26 @@
+{
+    "name": "Cube Rotation (Obelisk) Dev Container",
+    "dockerComposeFile": "../../docker/docker-compose.yml",
+    "service": "cube_rotation_obelisk",
+    "workspaceFolder": "${localEnv:HOME}/cube_rotation_obelisk",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mutantdino.resourcemonitor",
+                "ms-azuretools.vscode-docker",
+                "nvidia.nsight-vscode-edition",
+                "ritwickdey.liveserver",
+                "ms-vscode.cmake-tools",
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "ms-vscode.cpptools",
+                "twxs.cmake",
+                "tamasfe.even-better-toml"
+            ]
+        }
+    },
+    "remoteEnv": {
+        "CUBE_ROTATION_OBELISK_ROOT": "${localEnv: CUBE_ROTATION_OBELISK_ROOT}"
+    }
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="cube_ghost">
+  <xacro:include filename="$(find cro_ros)/urdf/cube/cube.xacro"/>
+  <xacro:cube suffix="ghost" alpha="0.25"/>
+</robot>

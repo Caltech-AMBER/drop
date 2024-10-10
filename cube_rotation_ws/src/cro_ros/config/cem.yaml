@@ -1,0 +1,350 @@
+config: cro
+onboard:
+  control:
+    - pkg: cro_control
+      executable: cro_controller
+      params:
+        mjpc_render: false
+        sampling_trajectories: 120
+        agent_planner: 5  # CEM
+        agent_horizon: 1.0
+        agent_timestep: 0.01
+        n_elite: 4
+        sampling_spline_points: 4
+        # options: 0 for zero-order splines, 1 for linear splines, 2 for cubic splines
+        sampling_representation: 0
+        cost_pos: 2.5
+        cost_orientation: 1.0
+        cost_actuation: 0.0
+        cost_grasp: 0.0
+        cost_cube_linear_velocity: 0.0
+        cost_cube_angular_velocity: 0.0
+        std_min: 0.5
+        axis_aligned_goal: 0
+      callback_groups:
+        pub_ctrl_cbg: MutuallyExclusiveCallbackGroup
+        viz_cbg: MutuallyExclusiveCallbackGroup
+        sub_est_cbg: MutuallyExclusiveCallbackGroup
+      publishers:
+        - ros_parameter: pub_ctrl_setting
+          topic: /cro/ctrl
+          msg_type: PositionSetpoint
+          history_depth: 10
+          callback_group: pub_ctrl_cbg
+          non_obelisk: False
+        - ros_parameter: pub_q_cube_goal_setting
+          topic: /cro/q_cube_goal
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: viz_cbg
+          non_obelisk: False
+      subscribers:
+        - ros_parameter: sub_est_setting
+          topic: /cro/q_leap_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: sub_est_cbg
+          non_obelisk: False
+        - ros_parameter: sub_q_cube_setting
+          topic: /cro/q_cube_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: sub_est_cbg
+          non_obelisk: False
+      timers:
+        - ros_parameter: timer_ctrl_setting
+          timer_period_sec: 0.01
+          callback_group: pub_ctrl_cbg
+        - ros_parameter: timer_q_cube_goal_setting
+          timer_period_sec: 0.02
+          callback_group: viz_cbg
+  estimation:
+    - pkg: cro_estimation
+      executable: cro_estimator
+      params:
+        # options: [argus, perseus]
+        estimator_type: perseus
+        # options: [proj, wrench]
+        corrector_type: wrench
+        # EMA filter parameters for the cube/leap velocities
+        alpha_cube: 0.1
+        alpha_leap: 0.1
+        # perseus parameters
+        perseus_smoother_freq: 100.0
+        perseus_lookback: 1
+        perseus_depth: True
+        # general corrector params
+        corrector_timestep: 0.004
+        corrector_q_leap: True  # whether to send the corrector's q_leap to the controller
+        corrector_v_leap: False  # whether to send the corrector's v_leap to the controller
+        # collision projection parameters
+        coll_steps: 10
+        # wrench corrector parameters
+        wrench_kp_pos: 1000.0
+        wrench_ki_pos: 0.0
+        wrench_kd_pos: 1.0
+        wrench_kp_rot: 3.0
+        wrench_ki_rot: 0.0
+        wrench_kd_rot: 0.001
+        wrench_pass_v_cube: False
+        # visualization (WARNING: this will slow down the estimator!!! ONLY USE FOR DEBUGGING KEYPOINTS!!!)
+        viz_images: False
+        # [HACK] manual adjustments
+        cam_C_trans_adjust: [0.0, -0.005, 0.01]  # translation adjustment for cam C in the world frame
+        q_cube_trans_adjust: [0.0, 0.01, 0.0]  # translation adjustment for the cube post-smoothing in the world frame
+      callback_groups:
+        sub_cbg: ReentrantCallbackGroup
+        pub_cbg: MutuallyExclusiveCallbackGroup
+        smoother_cbg: MutuallyExclusiveCallbackGroup
+        viz_cbg: MutuallyExclusiveCallbackGroup
+      publishers:
+        - ros_parameter: pub_est_setting
+          topic: /cro/q_leap_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: pub_cbg
+          non_obelisk: False
+        - ros_parameter: pub_q_leap_meas_setting
+          topic: /cro/q_leap_meas_viz
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: viz_cbg
+          non_obelisk: False
+        - ros_parameter: pub_q_leap_ghost_setting
+          topic: /cro/q_leap_ghost_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: viz_cbg
+          non_obelisk: False
+        - ros_parameter: pub_q_cube_setting
+          topic: /cro/q_cube_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: pub_cbg
+          non_obelisk: False
+        - ros_parameter: pub_q_cube_ghost_setting
+          topic: /cro/q_cube_ghost_est
+          msg_type: EstimatedState
+          history_depth: 10
+          callback_group: viz_cbg
+          non_obelisk: False
+      subscribers:
+        - ros_parameter: sub_q_leap_setting
+          topic: /cro/q_leap_meas
+          msg_type: ObkJointEncoders
+          history_depth: 10
+          callback_group: sub_cbg
+          non_obelisk: False
+      timers:
+        - ros_parameter: timer_smoother_setting
+          timer_period_sec: 0.01
+          callback_group: smoother_cbg
+        - ros_parameter: timer_est_setting
+          timer_period_sec: 0.01
+          callback_group: pub_cbg
+  robot:
+    # ############# #
+    # REAL HARDWARE #
+    # ############# #
+    - is_simulated: False
+      pkg: obelisk_leap_cpp
+      executable: obelisk_leap_robot
+      params:
+        KP: 75
+        KI: 0
+        KD: 25
+      # callback_groups:
+      publishers:
+        - ros_parameter: pub_sensor_setting
+          topic: /cro/q_leap_meas
+          msg_type: ObkJointEncoders
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      subscribers:
+        - ros_parameter: sub_ctrl_setting
+          topic: /cro/ctrl
+          msg_type: PositionSetpoint
+          history_depth: 10
+          callback_group: None
+          non_obelisk: False
+      timers:
+          - ros_parameter: timer_sensor_setting
+            timer_period_sec: 0.01
+            callback_group: None
+
+    # ############### #
+    # SIM FOR TESTING #
+    # ############### #
+    # - is_simulated: True
+    #   pkg: obelisk_sim_cpp
+    #   executable: obelisk_mujoco_robot
+    #   publishers:
+    #     - ros_parameter: pub_sensor_setting
+    #       topic: /cro/q_leap_meas
+    #       msg_type: ObkJointEncoders
+    #       history_depth: 10
+    #       callback_group: None
+    #       non_obelisk: False
+    #   subscribers:
+    #     - ros_parameter: sub_ctrl_setting
+    #       topic: /cro/ctrl
+    #       msg_type: PositionSetpoint
+    #       history_depth: 10
+    #       callback_group: None
+    #       non_obelisk: False
+    #   sim:
+    #     - ros_parameter: mujoco_setting
+    #       n_u: 16
+    #       time_step: 0.002
+    #       num_steps_per_viz: 5
+    #       robot_pkg: leap_rh
+    #       model_xml_path: leap_rh_mounted.xml
+    #       sensor_settings:
+    #       - topic: /cro/q_leap_meas
+    #         dt: 0.01
+    #         msg_type: ObkJointEncoders
+    #         sensor_names:
+    #           if_mcp_sensor: jointpos
+    #           if_rot_sensor: jointpos
+    #           if_pip_sensor: jointpos
+    #           if_dip_sensor: jointpos
+    #           mf_mcp_sensor: jointpos
+    #           mf_rot_sensor: jointpos
+    #           mf_pip_sensor: jointpos
+    #           mf_dip_sensor: jointpos
+    #           rf_mcp_sensor: jointpos
+    #           rf_rot_sensor: jointpos
+    #           rf_pip_sensor: jointpos
+    #           rf_dip_sensor: jointpos
+    #           th_cmc_sensor: jointpos
+    #           th_axl_sensor: jointpos
+    #           th_mcp_sensor: jointpos
+    #           th_ipl_sensor: jointpos
+
+  viz:
+    on: True
+    viz_tool: rviz
+    rviz_pkg: cro_ros
+    rviz_config: cro_config.rviz
+    viz_nodes:
+      # q_leap from the encoders
+      - pkg: obelisk_viz_cpp
+        executable: default_robot_viz
+        namespace: leap_rh
+        params:
+          quat_order: wxyz
+        robot_pkg: cro_ros
+        urdf: leap/leap_rh_mounted.urdf
+        robot_topic: leap_rh_description
+        subscribers:
+          - ros_parameter: sub_viz_est_setting
+            topic: /cro/q_leap_meas_viz
+            history_depth: 10
+            callback_group: None
+            non_obelisk: False
+        publishers:
+          - ros_parameter: pub_viz_joint_setting
+            topic: /cro/viz/q_leap_meas
+            history_depth: 10
+            callback_group: None
+        timers:
+          - ros_parameter: timer_viz_joint_setting
+            timer_period_sec: 0.05
+            callback_group: None
+      # corrector internal q_leap
+      - pkg: obelisk_viz_cpp
+        executable: default_robot_viz
+        namespace: leap_rh_ghost
+        params:
+          quat_order: wxyz
+        robot_pkg: cro_ros
+        urdf: leap/leap_rh_mounted_viz.urdf
+        robot_topic: leap_rh_ghost_description
+        subscribers:
+          - ros_parameter: sub_viz_est_setting
+            topic: /cro/q_leap_ghost_est
+            history_depth: 10
+            callback_group: None
+            non_obelisk: False
+        publishers:
+          - ros_parameter: pub_viz_joint_setting
+            topic: /cro/viz/q_leap_ghost
+            history_depth: 10
+            callback_group: None
+        timers:
+          - ros_parameter: timer_viz_joint_setting
+            timer_period_sec: 0.05
+            callback_group: None
+      # estimated cube state
+      - pkg: obelisk_viz_cpp
+        executable: default_robot_viz
+        namespace: cube
+        params:
+          quat_order: wxyz
+        robot_pkg: cro_ros
+        urdf: cube/cube.urdf
+        robot_topic: cube_description
+        subscribers:
+          - ros_parameter: sub_viz_est_setting
+            topic: /cro/q_cube_est
+            history_depth: 10
+            callback_group: None
+            non_obelisk: False
+        publishers:
+          - ros_parameter: pub_viz_joint_setting
+            topic: /cro/viz/q_cube
+            history_depth: 10
+            callback_group: None
+        timers:
+          - ros_parameter: timer_viz_joint_setting
+            timer_period_sec: 0.05
+            callback_group: None
+      # cube goal orientation
+      - pkg: obelisk_viz_cpp
+        executable: default_robot_viz
+        namespace: cube_goal
+        params:
+          quat_order: wxyz
+        robot_pkg: cro_ros
+        urdf: cube/cube_goal.urdf
+        robot_topic: cube_goal_description
+        subscribers:
+          - ros_parameter: sub_viz_est_setting
+            topic: /cro/q_cube_goal
+            history_depth: 10
+            callback_group: None
+            non_obelisk: False
+        publishers:
+          - ros_parameter: pub_viz_joint_setting
+            topic: /cro/viz/q_cube_goal
+            history_depth: 10
+            callback_group: None
+        timers:
+          - ros_parameter: timer_viz_joint_setting
+            timer_period_sec: 0.05
+            callback_group: None
+      # cube before correction
+      - pkg: obelisk_viz_cpp
+        executable: default_robot_viz
+        namespace: cube_ghost
+        params:
+          quat_order: wxyz
+        robot_pkg: cro_ros
+        urdf: cube/cube_ghost.urdf
+        robot_topic: cube_ghost_description
+        subscribers:
+          - ros_parameter: sub_viz_est_setting
+            topic: /cro/q_cube_ghost_est
+            history_depth: 10
+            callback_group: None
+            non_obelisk: False
+        publishers:
+          - ros_parameter: pub_viz_joint_setting
+            topic: /cro/viz/q_cube_ghost_est
+            history_depth: 10
+            callback_group: None
+        timers:
+          - ros_parameter: timer_viz_joint_setting
+            timer_period_sec: 0.05
+            callback_group: None

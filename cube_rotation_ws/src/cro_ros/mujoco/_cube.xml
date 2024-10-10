@@ -1,0 +1,6 @@
+<mujoco model="_cube">
+    <body name="cube" pos="0.0 0.0 0.0" quat="1 0 0 0">
+    <freejoint/>
+    <geom name="cube" type="box" size=".035 .035 .035" mass="0.108" material="cube"/>
+    </body>
+</mujoco>
